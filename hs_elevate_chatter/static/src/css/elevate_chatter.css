@@ -1,0 +1,86 @@
+/* Elevate Chatter Drawer styling */
+/* Apply this behavior only for large screens (desktop). Odoo's XXL is >= 1400px but LG/XL can be used.
+   Odoo usually puts chatter aside at XXL (1400px) or XL depending on layout. Let's use 1200px as breakpoint. */
+@media (min-width: 1200px) {
+    /* The main hook container acts as a flex item in the form view */
+    .hs-elevated-chatter {
+        flex: 0 0 auto !important;
+        width: 0 !important;
+        position: relative !important;
+        transition: width 0.3s ease-in-out;
+        margin: 0 !important;
+        padding: 0 !important;
+        /* Allow toggle to stick out */
+        overflow: visible !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        border-left: none !important;
+    }
+
+    .hs-elevated-chatter.hs-chatter-open {
+        /* Set standard chatter width here */
+        width: 500px !important;
+    }
+
+    /* The clipping container that grows with the parent */
+    .hs-chatter-clip {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* The actual content wrapper, fixed width, anchored to the right edge */
+    .hs-chatter-content-wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 500px;
+        height: 100%;
+        background-color: var(--o-view-background-color, #ffffff);
+        border-left: 1px solid var(--border-color, #dee2e6);
+        box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+    }
+
+    .hs-chatter-toggle {
+        position: absolute;
+        top: 50%;
+        left: -32px;
+        width: 32px;
+        height: 64px;
+        background-color: var(--o-view-background-color, #ffffff);
+        border: 1px solid var(--border-color, #dee2e6);
+        border-right: none;
+        border-radius: 8px 0 0 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.05);
+        z-index: 1051;
+        transform: translateY(-50%);
+        color: var(--o-gray-600, #6c757d);
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .hs-chatter-toggle:hover {
+        background-color: var(--o-gray-100, #f8f9fa);
+        color: var(--o-gray-800, #343a40);
+    }
+
+    /* Expand the form sheet when chatter is closed for better visibility */
+    .hs-chatter-closed-sheet {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+/* Hide toggle on smaller screens where default bottom layout remains */
+@media (max-width: 1199.98px) {
+    .hs-chatter-toggle {
+        display: none !important;
+    }
+}
